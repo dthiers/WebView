@@ -28,9 +28,11 @@ window.onload = function()
 
     // Input type color
     var $colorSwatch = $('#colorSwatch');
+    $colorSwatch[0].value = '#1c1c1c';
 
     var colorPicker = $colorPicker.data("plugin_tinycolorpicker");
-    console.log(colorPicker);
+    //console.log(colorPicker);
+    colorPicker.setColor('#1c1c1c');
 
     // When tinycolorpicker changes
     $colorPicker.bind("change", function(){
@@ -59,19 +61,20 @@ window.onload = function()
 // create an array with nodes
 var nodes = new vis.DataSet([
     //personen
-    {id: 1, label: 'Theo Brinkman', shape:'circularImage', image:"images/Personen/persoon1.png"},
-    {id: 2, label: 'Marita van den Heuvel', shape:'circularImage', image:"images/Personen/persoon6.png"},
-    {id: 3, label: 'Theo Mensen', shape:'circularImage', image:"images/Personen/persoon7.png"},
-    {id: 4, label: 'Els van der Pol', shape:'circularImage', image:"images/Personen/persoon8.png"},
-    {id: 5, label: 'Angela Horsten', shape:'circularImage', image:"images/Personen/persoon9.png"},
-    {id: 6, label: 'Hans van Daelen', shape:'circularImage', image:"images/Personen/persoon10.png"},
-    {id: 7, label: 'Stef van Wickeren', shape:'circularImage', image:"images/Personen/persoon11.png"},
-    {id: 8, label: 'Karin van Zutphen', shape:'circularImage', image:"images/Personen/persoon2.png"},
-    {id: 9, label: 'Siebrand Konst', shape:'circularImage', image:"images/Personen/persoon3.png"},
-    {id: 10, label: 'Koen Oosterbaan', shape:'circularImage', image:"images/Personen/persoon4.png"},
-    {id: 11, label: 'Jan Timmers', shape:'circularImage', image:"images/Personen/persoon5.png"},
-    {id: 12, label: 'Kristian van den Berg', shape:'circularImage', image:"images/Personen/persoon13.png"},
-    {id: 13, label: 'Marianne Rongen', shape:'circularImage', image:"images/Personen/persoon12.png"},
+    {id: 1, label: 'Theo Brinkman \n Stichting Digidact \n managing director & oprichter', shape:'circularImage', image:"images/Personen/persoon1.png"},
+    {id: 2, label: 'Marita van den Heuvel \n Wittering.nl \n regisseur, ICT coördinator', shape:'circularImage', image:"images/Personen/persoon6.png"},
+    {id: 3, label: 'Theo Mensen \n Stichting e-Portfolio Support \n secretaris', shape:'circularImage', image:"images/Personen/persoon7.png"},
+    {id: 4, label: 'Els van der Pol \n Signum \n directeur Onderwijs en Ontwikkeling', shape:'circularImage', image:"images/Personen/persoon8.png"},
+    {id: 5, label: 'Angela Horsten \n XPect Primair \n manager Schoolontwikkeling', shape:'circularImage', image:"images/Personen/persoon9.png"},
+    {id: 6, label: 'Hans van Daelen \n XPect Primair \n voorzitter College van Bestuur', shape:'circularImage', image:"images/Personen/persoon10.png"},
+    {id: 7, label: 'Stef van Wickeren \n Campus Columbus \n directeur', shape:'circularImage', image:"images/Personen/persoon11.png"},
+    {id: 8, label: 'Karin van Zutphen \n Wittering.nl \n directeur', shape:'circularImage', image:"images/Personen/persoon2.png"},
+    {id: 9, label: 'Siebrand Konst \n Stichting Flore \n Algemeen directeur Onderwijs en Personeel', shape:'circularImage', image:"images/Personen/persoon3.png"},
+    {id: 10, label: 'Koen Oosterbaan \n SKO Flevoland en Veluwe \n voorzitter College van Bestuur', shape:'circularImage', image:"images/Personen/persoon20.png"},
+    {id: 11, label: 'Jan Timmers \n Signum \n voorzitter College van Bestuur', shape:'circularImage', image:"images/Personen/persoon5.png"},
+    {id: 12, label: 'Kristian van den Berg \n SKO Flevoland en Veluwe \n projectmanager Onderwijsinnovatie en ICT', shape:'circularImage', image:"images/Personen/persoon13.png"},
+    {id: 13, label: 'Marianne Rongen \n Wittering.nl \n regisseur, innovator', shape:'circularImage', image:"images/Personen/persoon12.png"},
+    {id: 18, label: 'Annelies Verbeek \n SKO Flevoland en Veluwe \n lid College van Bestuur', shape:'circularImage', image:"images/Personen/persoon18.png"},
 
     //Termen
     {id: 14, label: 'E-portfolio', shape:'box'},
@@ -99,6 +102,7 @@ var edges = new vis.DataSet([
     {from: 13, to: 15},
     {from: 15, to: 4},
     {from: 15, to: 5},
+    {from: 15, to: 18},
 
     //zelfregulering
     {from: 13, to: 16},
@@ -133,7 +137,7 @@ web.prototype.renderWeb = function(){
     var container = document.getElementById('mynetwork');
 
     // provide the data in the vis format
-    data = {
+    /*data = {
         nodes: nodes,
         edges: edges
     };
@@ -143,13 +147,104 @@ web.prototype.renderWeb = function(){
             color: '#ffffff',
             font: {
                 color: '#000000'
+            },
+            label: {
+              enabled: false
+            },
+            scaling: {
+              min: 50,
+              max: 50,
             }
         },
         edges:{
             color: "#ffffff"
         },
 
+    };*/
+
+    // these are all options in full.
+    data = {
+        nodes: nodes,
+        edges: edges
     };
+    var options = {
+      nodes:{
+        borderWidth: 0,
+        borderWidthSelected: 1,
+        color: {
+          background: '#5a8ea0',
+          highlight: {
+            border: '#64a0b5',
+            background: '#4b8295'
+          }
+        },
+        // fixed: {
+        //   x:false,
+        //   y:false
+        // },
+        font: {
+          color: '#ffffff',
+          size: 14, // px
+          face: 'arial',
+          background: 'none',
+          strokeWidth: 1, // px
+          strokeColor: '#000000',
+
+        },
+        group: undefined,
+        hidden: false,
+        // icon: {
+        //   face: 'FontAwesome',
+        //   code: undefined,
+        //   size: 50,  //50,
+        //   color:'#2B7CE9'
+        // },
+        // image: undefined,
+        // label: undefined,
+        labelHighlightBold: true,
+        level: undefined,
+        mass: 1,
+        physics: true,
+        scaling: {
+          // min: 50,
+          // max: 60,
+          label: {
+            enabled: true,
+            // min: 14,
+            // max: 30,
+            // maxVisible: 30,
+            //drawThreshold: 5
+          },
+          customScalingFunction: function (min,max,total,value) {
+            if (max === min) {
+              return 0.5;
+            }
+            else {
+              let scale = 1 / (max - min);
+              return Math.max(0,(value - min)*scale);
+            }
+          }
+        },
+        shadow:{
+          enabled: true,
+          // color: 'rgba(0,0,0,0.5)',
+          color: '#1c1c1c',
+          size:20,
+          x:1,
+          y:1
+        },
+        size: 60,
+        title: undefined,
+        value: undefined,
+        // x: undefined,
+        // y: undefined
+      },
+      edges: {
+        length: 275,
+        color: '#c3dce5'
+      }
+    }
+
 
     // initialize your network!
     var network = new vis.Network(container, data, options);
